@@ -1,0 +1,16 @@
+---
+- name: Install Apache and Nginx on respective servers
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install Apache on Apache server
+      ansible.builtin.apt:
+        name: apache2
+        state: present
+      when: "'apache' in group_names"
+
+    - name: Install Nginx on Nginx server
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+      when: "'nginx' in group_names"
